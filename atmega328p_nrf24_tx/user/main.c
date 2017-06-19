@@ -1,6 +1,8 @@
 #include <avr/io.h>
+#include <util/delay.h>
 #include <stdio.h>
 #include "main.h"
+#include "nrf24.h"
 
 FILE uartstdout = FDEV_SETUP_STREAM(uart_putchar, NULL, _FDEV_SETUP_WRITE);
 
@@ -8,8 +10,12 @@ int main () {
 	uart_init();
 	stdout = &uartstdout;
 
+	nrf24_spi_init();
+
 	while(1) {
-		printf("Test\r\n");
+		_delay_ms(1000);
+		printf("SPCR: %02x\r\n", SPCR);
+		_delay_ms(1000);
 	}
 }
 

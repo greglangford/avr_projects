@@ -39,11 +39,12 @@ dirs:
 	@mkdir -p $(BUILD_DIR)
 	@mkdir -p $(FIRMWARE_ROOT)
 
-$(OBJS): $(SRC)
-	$(CC) $(CFLAGS) $< -o $@
 
 $(ELF_FILE): $(OBJS)
 	$(CC) $(LDFLAGS) $^ -o $@
 
 $(HEX_FILE): $(ELF_FILE)
 	avr-objcopy -j .text -j .data -O ihex $< $@
+
+$(BUILD_ROOT)/%.o: %.c
+	$(CC) $(CFLAGS) $< -o $@
