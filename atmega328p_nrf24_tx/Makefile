@@ -43,7 +43,7 @@ $(OBJS): $(SRC)
 	$(CC) $(CFLAGS) $< -o $@
 
 $(ELF_FILE): $(OBJS)
-	$(CC) $(LINKERFLAGS) $^ -o $@
+	$(CC) $(LDFLAGS) $^ -o $@
 
 $(HEX_FILE): $(ELF_FILE)
 	avr-objcopy -j .text -j .data -O ihex $< $@
